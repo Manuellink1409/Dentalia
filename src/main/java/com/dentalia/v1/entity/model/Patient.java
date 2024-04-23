@@ -7,6 +7,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -49,6 +51,10 @@ public class Patient {
 
     @Pattern(regexp="\\d{10}", message="Invalid phone number")
     private String emergency_phone;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id") 
+    private User doctor_assigned;
 
     @Enumerated(EnumType.STRING)
     private Status status;
